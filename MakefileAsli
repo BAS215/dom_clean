@@ -1,0 +1,219 @@
+OBJECTS = potPara.o merson.o legendre.o waves.o minimize1D.o minimizeND.o fit.o imaginaryForm.o whit.o coul.o compound.o level.o channel.o expInt.o  reaction.o volume.o hartreeFock.o spinOrbit.o asy.o gaussInteg.o gauss16.o sphericalB.o  plot.o disperse.o twoFermi.o surfaceTF.o surVolume.o levelD.o compoundException.o standard.o surfaceSTD.o numerov.o numerovR.o  pot.o scatterRspace.o boundRspace.o io.o eigen.o density.o meshes.o numerical.o read_parameters.o surfaceGeneral.o read_data.o
+
+OBJECTS2 =  scat.o PotPara.o merson.o Legendre.o waves.o whit.o coul.o ExpInt.o
+
+OBJECTS3 = hamiltonian.o manybody.o read_parameters.o numerical.o meshes.o io.o eigen.o density.o potPara.o imaginaryForm.o asy.o gaussInteg.o gauss16.o expInt.o volume.o hartreeFock.o spinOrbit.o sphericalB.o disperse.o twoFermi.o surfaceTF.o surVolume.o pot.o surfaceGeneral.o 
+
+OBJECTS4 = hamiltonian.o manybody.o read_parameters.o numerical.o meshes.o io.o eigen.o density.o potPara.o imaginaryForm.o asy.o gaussInteg.o gauss16.o expInt.o volume.o hartreeFock.o spinOrbit.o sphericalB.o disperse.o twoFermi.o surfaceTF.o surVolume.o pot.o functional_forms.o Legendre.o fourier.o S_Shell.o R_Matrix.o RedSelfEnergy.o kMesh.o cross_sections.o bobs_pot_k_space.o surfaceGeneral.o
+
+OBJECTS5 = read_parameters.o numerical.o meshes.o io.o eigen.o density.o potPara.o imaginaryForm.o asy.o gaussInteg.o gauss16.o expInt.o volume.o hartreeFock.o spinOrbit.o sphericalB.o disperse.o twoFermi.o surfaceTF.o surVolume.o pot.o numerovR.o whit.o coul.o boundRspace.o surfaceGeneral.o 
+
+ALLOBJECTS := $(patsubst %.cpp,%.o,$(wildcard *.cpp))
+
+# Includes
+BOOST_INCLUDES = -I/usr/local/boost_1_48_0
+BNB_CFLAGS = -I/usr/local/include/boost-numeric-bindings
+
+# Libraries
+LAPACK_LIBS = -llapack -lgfortran
+ATLAS_LIBS = -L/usr/lib64/atlas -latlas -lcblas
+GSL_CFLAGS = $(shell gsl-config --cflags)
+GSL_LIBS = $(shell gsl-config --libs)
+
+CFLAGS= -c -Wall -W -O3 -I$(shell root-config --incdir) $(BOOST_INCLUDES) $(BNB_CFLAGS) $(GSL_CFLAGS)
+#CFLAGS= -c -Wall -W -ggdb -I$(shell root-config --incdir) $(BOOST_INCLUDES) $(BNB_CFLAGS) $(GSL_CFLAGS)
+COMPILER= c++ 
+LINKOPTION = $(shell root-config --libs) $(LAPACK_LIBS) $(ATLAS_LIBS) $(GSL_LIBS)
+
+chisq:  chisq.o $(OBJECTS)
+	$(COMPILER) -o chisq chisq.o $(OBJECTS) $(LINKOPTION)
+
+chisqOM:  chisqOM.o $(OBJECTS)
+	$(COMPILER) -o chisqOM chisqOM.o $(OBJECTS) $(LINKOPTION)
+
+chisqAT:  chisqAT.o $(OBJECTS)
+	$(COMPILER) -o chisqAT chisqAT.o $(OBJECTS) $(LINKOPTION)
+
+chisqOA:  chisqOA.o $(OBJECTS)
+	$(COMPILER) -o chisqOA chisqOA.o $(OBJECTS) $(LINKOPTION)
+
+chisqOT:  chisqOT.o $(OBJECTS)
+	$(COMPILER) -o chisqOT chisqOT.o $(OBJECTS) $(LINKOPTION)
+
+chisqOTT:  chisqOTT.o $(OBJECTS)
+	$(COMPILER) -o chisqOTT chisqOTT.o $(OBJECTS) $(LINKOPTION)
+
+chisqATT:  chisqATT.o $(OBJECTS)
+	$(COMPILER) -o chisqATT chisqATT.o $(OBJECTS) $(LINKOPTION)
+
+chisqOMM:  chisqOMM.o $(OBJECTS)
+	$(COMPILER) -o chisqOMM chisqOMM.o $(OBJECTS) $(LINKOPTION)
+
+chisqOAA:  chisqOAA.o $(OBJECTS)
+	$(COMPILER) -o chisqOAA chisqOAA.o $(OBJECTS) $(LINKOPTION)
+
+chisqS:  chisqS.o $(OBJECTS)
+	$(COMPILER) -o chisqS chisqS.o $(OBJECTS) $(LINKOPTION)
+
+testM:  testM.o $(OBJECTS)
+	$(COMPILER) -o testM testM.o $(OBJECTS) $(LINKOPTION)
+
+iterate:  iterate.o $(OBJECTS)
+	$(COMPILER) -o iterate iterate.o $(OBJECTS) $(LINKOPTION)
+
+Form:  Form.o IForm.o
+	$(COMPILER) -o Form Form.o IForm.o ExpInt.o $(LINKOPTION)
+
+alev:  alev.o alev.o
+	$(COMPILER) -o alev alev.o  $(LINKOPTION)
+
+Form2:  Form2.o $(OBJECTS)
+	$(COMPILER) -o Form2 Form2.o IForm.o $(LINKOPTION)
+
+GetPot:  GetPot.o $(OBJECTS)
+	$(COMPILER) -o GetPot GetPot.o $(OBJECTS) $(LINKOPTION)
+
+plain:  plain.o $(OBJECTS)
+	$(COMPILER) -o plain plain.o $(OBJECTS) $(LINKOPTION)
+
+testCoul:  testCoul.o $(OBJECTS)
+	$(COMPILER) -o testCoul testCoul.o $(OBJECTS) $(LINKOPTION)
+
+testChannel:  testChannel.o $(OBJECTS)
+	$(COMPILER) -o testChannel testChannel.o $(OBJECTS) $(LINKOPTION)
+
+bi209:  bi209.o $(OBJECTS)
+	$(COMPILER) -o bi209 bi209.o $(OBJECTS) $(LINKOPTION)
+
+testWaves:  testWaves.o $(OBJECTS)
+	$(COMPILER) -o testWaves testWaves.o $(OBJECTS) $(LINKOPTION)
+
+testWhit:  testWhit.o $(OBJECTS)
+	$(COMPILER) -o testWhit testWhit.o $(OBJECTS) $(LINKOPTION)
+
+testU:  testU.o $(OBJECTS)
+	$(COMPILER) -o testU testU.o $(OBJECTS) $(LINKOPTION)
+
+testGamma:  testGamma.o $(OBJECTS)
+	$(COMPILER) -o testGamma testGamma.o $(OBJECTS) $(LINKOPTION)
+
+testSurVolume:  testSurVolume.o $(OBJECTS)
+	$(COMPILER) -o testSurVolume testSurVolume.o $(OBJECTS) $(LINKOPTION)
+
+testTwoFermi:  testTwoFermi.o $(OBJECTS)
+	$(COMPILER) -o testTwoFermi testTwoFermi.o $(OBJECTS) $(LINKOPTION)
+
+kin:  kin.o 
+	$(COMPILER) -o kin kin.o  $(LINKOPTION)
+
+Bekin:  Bekin.o 
+	$(COMPILER) -o Bekin Bekin.o  $(LINKOPTION)
+
+revKin:  revKin.o 
+	$(COMPILER) -o revKin revKin.o  $(LINKOPTION)
+
+BerevKin:  BerevKin.o 
+	$(COMPILER) -o BerevKin BerevKin.o  $(LINKOPTION)
+
+leg: leg.o $(OBJECTS)
+	$(COMPILER) -o leg leg.o  $(OBJECTS) $(LINKOPTION)
+
+OM_tl: OM_tl.o $(OBJECTS)
+	$(COMPILER) -o OM_tl OM_tl.o  $(OBJECTS) $(LINKOPTION)
+
+trans: trans.o $(OBJECTS2)
+	$(COMPILER) -o trans trans.o $(OBJECTS2) $(LINKOPTION)
+
+tl: tl.o $(OBJECTS)
+	$(COMPILER) -o tl tl.o $(OBJECTS) $(LINKOPTION)
+
+transP: transP.o $(OBJECTS2)
+	$(COMPILER) -o transP transP.o $(OBJECTS2) $(LINKOPTION)
+
+transB10: transB10.o $(OBJECTS2)
+	$(COMPILER) -o transB10 transB10.o $(OBJECTS2) $(LINKOPTION)
+
+Vintegral: Vintegral.o $(OBJECTS2)
+	$(COMPILER) -o Vintegral Vintegral.o $(OBJECTS2) $(LINKOPTION)
+
+Width:   Width.o IWidth.o IForm.o Gauss.o ExpInt.o
+	$(COMPILER) -o Width Width.o IWidth.o IForm.o Gauss.o ExpInt.o $(LINKOPTION)
+
+dom_fitE: dom_fitE.o $(OBJECTS) 
+	$(COMPILER) -o dom_fitE dom_fitE.o $(OBJECTS) $(LINKOPTION)
+
+domgen: domgen.o $(OBJECTS) 
+	$(COMPILER) -o domgen domgen.o $(OBJECTS) $(LINKOPTION)
+
+Cdom: Cdom.o $(OBJECTS) 
+	$(COMPILER) -o Cdom Cdom.o $(OBJECTS) $(LINKOPTION)
+
+test: test.o $(OBJECTS) 
+	$(COMPILER) -o test test.o $(OBJECTS) $(LINKOPTION)
+
+nofk: nofk.o $(OBJECTS) 
+	$(COMPILER) -o nofk nofk.o $(OBJECTS) $(LINKOPTION)
+
+S: S.o $(OBJECTS) 
+	$(COMPILER) -o S S.o $(OBJECTS) $(LINKOPTION)
+
+domgen_k: domgen_k.o $(OBJECTS3) 
+	$(COMPILER) -o domgen_k domgen_k.o $(OBJECTS3) $(LINKOPTION)
+
+tensor: tensor.o $(OBJECTS3) 
+	$(COMPILER) -o tensor tensor.o $(OBJECTS3) $(LINKOPTION)
+
+test_xsec: test_cross_section.o $(OBJECTS4)
+	$(COMPILER) -o test_xsec test_cross_section.o $(OBJECTS4) $(LINKOPTION)
+
+spf_k: main_spf_k.o $(OBJECTS)
+	$(COMPILER) -o spf_k main_spf_k.o $(OBJECTS) $(LINKOPTION)
+
+vint: volume_integral.o $(OBJECTS3)
+	$(COMPILER) -o vint volume_integral.o $(OBJECTS3) $(LINKOPTION)
+
+getPot: getPot.o $(OBJECTS3)
+	$(COMPILER) -o getPot getPot.o $(OBJECTS3) $(LINKOPTION)
+
+testhamil: testhamil.o $(OBJECTS5)
+	$(COMPILER) -o testhamil testhamil.o $(OBJECTS5) $(LINKOPTION)
+
+test_B: test_boundRspace.o $(OBJECTS)
+	$(COMPILER) -o test_B test_boundRspace.o $(OBJECTS) $(LINKOPTION)
+
+
+integral : integral.o $(OBJECTS) 
+	$(COMPILER) -o integral integral.o $(OBJECTS) $(LINKOPTION)
+
+wavefunction : wavefunction.o $(OBJECTS) 
+	$(COMPILER) -o wavefunction wavefunction.o $(OBJECTS) $(LINKOPTION)
+
+wine : wine.o $(OBJECTS) 
+	$(COMPILER) -o wine wine.o $(OBJECTS) $(LINKOPTION)
+
+J_W : J_W.o $(OBJECTS) 
+	$(COMPILER) -o J_W J_W.o $(OBJECTS) $(LINKOPTION)
+
+DOM_Pot_for_Helber : DOM_Pot_for_Helber.o $(OBJECTS) 
+	$(COMPILER) -o DOM_Pot_for_Helber DOM_Pot_for_Helber.o $(OBJECTS) $(LINKOPTION)
+
+domgenII: domgenII.o $(OBJECTS) 
+	$(COMPILER) -o domgenII domgenII.o $(OBJECTS) $(LINKOPTION)
+
+domgenIIn: domgenIIn.o $(OBJECTS) 
+	$(COMPILER) -o domgenIIn domgenIIn.o $(OBJECTS) $(LINKOPTION)
+
+unfold_chd: unfold_chd.o $(OBJECTS) 
+	$(COMPILER) -o unfold_chd unfold_chd.o $(OBJECTS) $(LINKOPTION)
+
+
+dom_2_kSpace : dom_2_kSpace.o $(OBJECTS) 
+	$(COMPILER) -o dom_2_kSpace dom_2_kSpace.o $(OBJECTS) $(LINKOPTION)
+
+$(ALLOBJECTS): %.o : %.cpp
+	$(COMPILER) $(CFLAGS) $< -o $@
+
+
+clean:
+	rm -f *.o
+

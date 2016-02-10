@@ -1,0 +1,7 @@
+# The last parameter determines which potential to use
+# In this case, 2 means to use the screened coulomb
+1.000000 20.00000000000 40.00000000000 -4.71000000000 1
+2
+0 1.5 2 -8.3300
+0 3.5 3 -1.0850
+7.243 7.278

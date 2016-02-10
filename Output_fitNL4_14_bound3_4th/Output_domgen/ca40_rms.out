@@ -1,0 +1,14 @@
+Folded with proton charge distribution only
+RMS radius: 3.53693
+Number of protons: 19.9999
+ 
+Proton, neutron and spin-orbit contributions included
+RMS radius: 3.52055
+Number of protons: 20
+Mean Square Radius for different contributions (normalized by Z = 20)
+ 
+Proton Contribution (with Folding): 12.5098
+Neutron Conribution: -0.115494
+Spin-orbit Contribution: 0
+ 
+Check with total: 3.52055

@@ -1,0 +1,78 @@
+#
+#      Compilation of non-local DOM potential
+#
+#
+
+OBJECTS = potPara.o merson.o legendre.o waves.o minimize1D.o minimizeND.o\
+ fit.o imaginaryForm.o whit.o coul.o compound.o\
+ level.o channel.o expInt.o  reaction.o volume.o\
+ hartreeFock.o spinOrbit.o asy.o gaussInteg.o gauss16.o sphericalB.o  plot.o\
+ disperse.o twoFermi.o surfaceTF.o surVolume.o levelD.o\
+ compoundException.o standard.o surfaceSTD.o numerov.o numerovR.o\
+ pot.o scatterRspace.o boundRspace.o io.o eigen.o density.o \
+ meshes.o numerical.o read_parameters.o surfaceGeneral.o read_data.o\
+ FourierBessel.o dom_nonlocal_rspace.o kMesh.o RedSelfEnergy.o spectralFunction.o
+
+
+ALLOBJECTS := $(patsubst %.cpp,%.o,$(wildcard *.cpp))
+
+# Includes
+BOOST_INCLUDES = -I/usr/local/boost_1_48_0
+BNB_CFLAGS = -I/usr/local/include/boost-numeric-bindings
+
+# Libraries
+LAPACK_LIBS = -llapack -lgfortran
+ATLAS_LIBS = -L/usr/lib64/atlas -latlas -lcblas
+GSL_CFLAGS = $(shell gsl-config --cflags)
+GSL_LIBS = $(shell gsl-config --libs)
+
+CFLAGS= -c -Wall -W -O3 -I$(shell root-config --incdir) $(BOOST_INCLUDES) $(BNB_CFLAGS) $(GSL_CFLAGS)
+COMPILER= c++ 
+LINKOPTION = $(shell root-config --libs) $(LAPACK_LIBS) $(ATLAS_LIBS) $(GSL_LIBS)
+
+##### PREPARE DEPENDENCIES
+#  Headers
+mainH = dom_2_kSpace.h
+potH = pot.h
+potParaH = potPara.h
+FBH = FourierBessel.hpp
+standardH = standard.h
+dom_nl_rH = dom_nonlocal_rspace.hpp
+kmeshH = kMesh.hpp
+redselfenergyH = RedSelfEnergy.hpp
+spectralH = spectralFunction.hpp
+#  Objects
+mainO = dom_2_kSpace.o
+potO  = pot.o
+potParaO = potPara.o
+FBO = FourierBessel.o
+standardO = standard.o
+dom_nl_rO = dom_nonlocal_rspace.o
+kmeshO = kMesh.o
+redselfenergyO = RedSelfEnergy.o
+spectralO = spectralFunction.o
+##### COMPILE
+dom_2_kSpace : dom_2_kSpace.o $(OBJECTS) 
+	$(COMPILER) -o dom_2_kSpace dom_2_kSpace.o $(OBJECTS) $(LINKOPTION)
+
+
+$(ALLOBJECTS): %.o : %.cpp
+	$(COMPILER) $(CFLAGS) $< -o $@
+
+
+clean:
+	rm -f *.o
+cleanAll:
+	rm -f dom_2_kSpace *.o
+#
+#dependencies
+#
+$(mainO) = $(mainH)
+$(potO)  = $(potH)
+$(potParaO) = $(potParaH)
+$(FBO) = $(FBH)
+$(standardO) = $(standardH)
+$(dom_nl_rO) = $(dom_nl_rH)
+$(kmeshO) = $(kmeshH)
+$(redselfenergyO) = $(redselfenergyH)
+$(spectralO) = $(spectralH)
