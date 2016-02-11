@@ -1,0 +1,4 @@
+In order to look at Ca40 levels, use wavefunction.cpp. 
+If you run wavefunction, it will show you the various quasihole levels. 
+
+Change pca40.inp to nca40.inp in the code in order to look at neutron levels.
